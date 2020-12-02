@@ -1,8 +1,9 @@
 import firebase from 'firebase/app';
 import { useContext } from 'react';
 import { userContext } from '../userContext';
+import { createUserData } from '../DB/helper';
 
-
+// just a wrapper for accessing the data from the provider
 export const useSession = () => {
   const {user} = useContext(userContext);
   return user;
@@ -24,7 +25,9 @@ export const loginWithEmail = async (email, password) => {
 
 export const createUserWithEmail = async (email, password) => {
   try {
-    await firebase.auth().createUserWithEmailAndPassword(email, password);
+    const result = await firebase.auth().createUserWithEmailAndPassword(email, password);
+    
+    await createUserData(result.user.uid, {userFuckabilityStatus: Math.ceil(Math.random()*10)});
   } catch (err) {
     console.error(err);
     throw err;
