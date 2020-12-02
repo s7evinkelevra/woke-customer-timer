@@ -2,6 +2,8 @@ import React from 'react';
 import firebase from 'firebase';
 import { useSession } from '../Auth/helper';
 import { getUserFields, createSticky } from './helper';
+import { useForm } from 'react-hook-form';
+
 
 const testEntry = async (user) => {
   const entry = await createSticky(user.uid, {
@@ -18,6 +20,11 @@ const testEntry = async (user) => {
 
 const CreateSticky = (props) => {
   const user = useSession();
+  const { register, handleSubmit, watch, errors, getValues } = useForm();
+
+  const onSubmit = async (data) => {
+    
+  }
 
   return (
     <div>
