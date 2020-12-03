@@ -22,18 +22,23 @@ export const createEntry = (options) => {
 }
 
 // create user with some additional info when an account is created.
-export const createUserData = (userId, userData) => {
+// also add all the user info we have here
+export const createUserData = (user, userData) => {
   console.log("creating user in database....");
-  return fs.collection('users').doc(userId).set({
-    ..._.omitBy(userData,_.isNil)
+  return fs.collection('users').doc(user.uid).set({
+    ..._.omitBy(userData,_.isNil),
+    ...getUserFields(user)
   });
 }
 
 
 // this also creates a user in users collection and add a strickies collection to the user doc in case there isn't one already
-export const createSticky = (userId, stickyData) => {
+export const createSticky = (user, stickyData) => {
   console.log("creating sticky....");
-  return fs.collection('users').doc(userId).collection('stickies').add({
-    ..._.omitBy(stickyData,_.isNil)
+  console.log(user.uid);
+  return fs.collection('users').doc(user.uid).collection('stickies').add({
+    ..._.omitBy(stickyData,_.isNil),
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+    user: getUserFields(user),
   });
 }
