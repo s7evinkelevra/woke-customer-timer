@@ -5,6 +5,7 @@ import { getUserFields, createSticky } from './helper';
 import { useForm } from 'react-hook-form';
 
 
+
 const testEntry = async (user) => {
   const entry = await createSticky(user.uid, {
     userId: user.uid,
@@ -18,46 +19,61 @@ const testEntry = async (user) => {
   console.log(entry);
 }
 
-
 const CreateSticky = (props) => {
   const user = useSession();
   const { register, handleSubmit, watch, errors, getValues } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("yeee");
+    console.log(getValues());
+    const entry = await createSticky(user, {
+      ...getValues()
+    });
   }
 
-  console.log(watch("recurring"));
 
+   const recurringIntervalField = () => (
+    <div>
+      <label htmlFor="recurringInterval">Intervall [Tage]</label>
+      <input type="number" name="recurringInterval" defaultValue={0} ref={register} />
+      {errors.recurringInterval && <span>recurring error lul error</span>}
+    </div>
+  )
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="title">Titel</label>
-      <input name="title" ref={register({ required: true })} />
-      {errors.title && <span>yeeee</span>}
+      <div>
+        <label htmlFor="title">Titel</label>
+        <input name="title" ref={register({ required: true })} />
+        {errors.title && <span>yeeee</span>}
+      </div>
 
-      <label htmlFor="description">Beschreibung</label>
-      <input name="description" defaultValue="description" ref={register({ required: true })} />
-      {errors.description && <span>Pflichtfeld</span>}
+      <div>
+        <label htmlFor="description">Beschreibung</label>
+        <textarea type="textfield" name="description" placeholder="description" ref={register({ required: true })} />
+        {errors.description && <span>Pflichtfeld</span>}
+      </div>
 
-      <label htmlFor="dueDate">Ablaufdatum</label>
-      <input type="date" name="dueDate" ref={register} />
-      {errors.dueDate && <span>Datum error</span>}
-
-      <label htmlFor="recurring">Wiederholen</label>
-      <input type="checkbox" name="recurring" ref={register} />
-      {errors.recurring && <span>recurring error lul error</span>}
-
-      {getValues("recurring") && 
-          <p>yee suck my dick</p>
+      <div>
+        <label htmlFor="dueDate">Ablaufdatum</label>
+        <input type="date" name="dueDate" ref={register} />
+        {errors.dueDate && <span>Datum error</span>}
+      </div>
+      
+      <div>
+        <label htmlFor="recurring">Wiederholen</label>
+        <input type="checkbox" name="recurring" ref={register} />
+        {errors.recurring && <span>recurring error lul error</span>}
+      </div>
+      
+      {watch("recurring") && 
+        recurringIntervalField()
       }
 
       {errors.errorMessage?.message}
 
-
       <input type="submit" />
     </form>
-  );
+  ); 
 };
 
 export default CreateSticky;
