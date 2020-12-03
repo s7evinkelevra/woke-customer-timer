@@ -18,19 +18,45 @@ const testEntry = async (user) => {
   console.log(entry);
 }
 
+
 const CreateSticky = (props) => {
   const user = useSession();
   const { register, handleSubmit, watch, errors, getValues } = useForm();
 
   const onSubmit = async (data) => {
-    
+    console.log("yeee");
   }
 
+  console.log(watch("recurring"));
+
+
   return (
-    <div>
-      <h2>Create Sticky yee yee</h2>
-      { user && <button onClick={() => testEntry(user)}>create</button> }
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label htmlFor="title">Titel</label>
+      <input name="title" ref={register({ required: true })} />
+      {errors.title && <span>yeeee</span>}
+
+      <label htmlFor="description">Beschreibung</label>
+      <input name="description" defaultValue="description" ref={register({ required: true })} />
+      {errors.description && <span>Pflichtfeld</span>}
+
+      <label htmlFor="dueDate">Ablaufdatum</label>
+      <input type="date" name="dueDate" ref={register} />
+      {errors.dueDate && <span>Datum error</span>}
+
+      <label htmlFor="recurring">Wiederholen</label>
+      <input type="checkbox" name="recurring" ref={register} />
+      {errors.recurring && <span>recurring error lul error</span>}
+
+      {getValues("recurring") && 
+          <p>yee suck my dick</p>
+      }
+
+      {errors.errorMessage?.message}
+
+
+      <input type="submit" />
+    </form>
   );
 };
 
