@@ -27,7 +27,7 @@ export const createUserWithEmail = async (email, password) => {
   try {
     const result = await firebase.auth().createUserWithEmailAndPassword(email, password);
     
-    await createUserData(result.user.uid, {userFuckabilityStatus: Math.ceil(Math.random()*10)});
+    await createUserData(result.user, {userFuckabilityStatus: Math.ceil(Math.random()*10)});
   } catch (err) {
     console.error(err);
     throw err;
