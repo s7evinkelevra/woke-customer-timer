@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
-import { loginWithEmail } from './helper';
-import { SignUpLink } from './SignUp';
+import { loginWithEmail, SignUpLink } from './helper';
 
 import * as ROUTES from '../../config/routes';
+import { Button, Form } from 'react-bootstrap';
 
 const SignIn = (props) => (
   <div>
@@ -16,6 +16,7 @@ const SignIn = (props) => (
 );
 
 const SignInForm = props => {
+  const [firebaseError, setFirebaseError] = useState("");
 
   let history = useHistory();
   const { register, handleSubmit, watch, errors, getValues } = useForm();
@@ -24,25 +25,48 @@ const SignInForm = props => {
     console.log(data);
 
     try {
-      const user = await loginWithEmail(getValues('email'), getValues('password1'));
+      await loginWithEmail(getValues('email'), getValues('password'));
+      setFirebaseError("");
       history.push(ROUTES.HOME);
     } catch (error) {
+      setFirebaseError(error.message);
       console.log(error);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form.Group controlId="formMail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="email" name="email" placeholder="Email eingeben" defaultValue="test@test.test" ref={register({required:true})} />
+        <Form.Text className="text-muted">
+          {errors.email && <span>Email is required!</span>}
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="formPassword">
+        <Form.Label>Passwort</Form.Label>
+        <Form.Control type="password" name="password" defaultValue="test123456" ref={register({ required: true })} />
+        <Form.Text className="text-muted">
+          {errors.password && <span>Password is required!</span>}
+          {firebaseError != "" && <span>{firebaseError}</span>}
+        </Form.Text>
+      </Form.Group>
+      <Button variant="primary" type="submit">Anmelden</Button>
+    </Form>
+
+/*     <form onSubmit={handleSubmit(onSubmit)}>
       <input name="email" defaultValue="test@test.test" ref={register({ required: true })} />
       {errors.email && <span>yeeee</span>}
 
-      <input name="password1" defaultValue="test123456" ref={register({ required: true })} />
+      <input type="password" name="password1" defaultValue="test123456" ref={register({ required: true })} />
       {errors.password1 && <span>Pflichtfeld</span>}
 
       <input type="submit" />
-    </form>
+    </form> */
   );
 }
+
 
 export default SignIn;
 

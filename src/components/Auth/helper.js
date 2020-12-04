@@ -1,7 +1,10 @@
 import firebase from 'firebase/app';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { userContext } from '../userContext';
 import { createUserData } from '../DB/helper';
+import * as ROUTES from '../../config/routes';
 
 // just a wrapper for accessing the data from the provider
 export const useSession = () => {
@@ -34,4 +37,23 @@ export const createUserWithEmail = async (email, password) => {
   }
 };
 
+
+const SignUpLink = () => (
+  <p>
+    Noch keinen Account? <Link to={ROUTES.SIGN_UP}>Registrieren</Link>
+  </p>
+)
+export { SignUpLink };
+
+const SignInLink = () => (
+  <p>
+    Schon einen Account? <Link to={ROUTES.SIGN_IN}>Anmelden</Link>
+  </p>
+)
+export { SignInLink };
+
+
 export const signOut = () => firebase.auth().signOut();
+
+
+
