@@ -38,14 +38,15 @@ function App() {
       }}>
       <Router>
         <Navigation />
+        <Route exact path={ROUTES.LANDING} component={Landing} />
+        
         <Container>
-          <p>
+{/*           <p>
             Current User: {user?.email} - {user?.uid}
           </p>
           <button onClick={login}>Login</button>
-          <button onClick={logout}>Logout</button>
+          <button onClick={logout}>Logout</button> */}
           {/* Define the routes here */}
-          <Route exact path={ROUTES.LANDING} component={Landing} />
           <Route path={ROUTES.SIGN_UP} component={SignUp} />
           <Route path={ROUTES.SIGN_IN} component={SignIn} />
           <Route path={ROUTES.HOME} component={Home} />
