@@ -6,7 +6,7 @@ import StickyList from './DB/StickyList';
 const Home = () => {
   return (
     <React.Fragment>
-      <h1>home yee</h1>
+      <h1>Sticky Central</h1>
       <h2>Create new sticky</h2>
       <CreateSticky />
       <h2>List of Stickies</h2>
