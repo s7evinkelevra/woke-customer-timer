@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 
-import { loginWithEmail, SignUpLink } from './helper';
+import { loginWithEmail } from './helper';
+import { SignUpLink } from './SignUp';
 
 import * as ROUTES from '../../config/routes';
 import { Button, Form } from 'react-bootstrap';
@@ -67,6 +68,12 @@ const SignInForm = props => {
   );
 }
 
+const SignInLink = () => (
+  <p>
+    Haben Sie schon einen Account? <Link to={ROUTES.SIGN_IN}>Anmelden</Link>
+  </p>
+)
 
+export { SignInLink };
 export default SignIn;
 

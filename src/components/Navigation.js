@@ -1,8 +1,8 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-import { signOut, useSession } from './Auth/helper';
 
+import { useSession } from './Auth/helper';
+import { SignOutButton } from './Auth/SignOut';
 import * as ROUTES from '../config/routes';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 
@@ -21,7 +21,7 @@ const Navigation = () => {
     <Nav.Link as={Link} to={ROUTES.HOME}>Home</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.ACCOUNT}>Account</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.ADMIN}>Admin</Nav.Link>
-    <Nav.Link as={Button} variant="dark" style={{color:"white"}} onClick={signOut}>Abmelden</Nav.Link>
+    <Nav.Link as={SignOutButton} variant="dark" style={{ color: "white" }}></Nav.Link>
   </React.Fragment>
 
   return(

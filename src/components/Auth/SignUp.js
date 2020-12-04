@@ -4,7 +4,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 
 
-import { createUserWithEmail, SignInLink } from './helper';
+import { createUserWithEmail } from './helper';
+import { SignInLink } from './SignIn';
 import * as ROUTES from '../../config/routes';
 
 const SignUp = () => (
@@ -19,6 +20,10 @@ const SignUp = () => (
 const SignUpForm = props => {
   let history = useHistory();
 
+  // two (maybe three) types of error can occur here:
+  // 1. form validation "errors", caused by react form hook validation
+  // 2. Firebase errors when actually trying to submit the request (ie user already exists and such)
+  // (3.) react bootstrap has some own validation stuff
   const [firebaseError, setFirebaseError] = useState("");
   const { register, handleSubmit, watch, errors, getValues } = useForm();
 
@@ -67,7 +72,7 @@ const SignUpForm = props => {
 
       <Button variant="primary" type="submit">Registrieren</Button>
     </Form>
-
+    // old form
 /*     <form onSubmit={handleSubmit(onSubmit)}>
       <input name="email" defaultValue="test@test.test" ref={register({ required: true })} />
       {errors.email && <span>yeeee</span>}
@@ -84,4 +89,11 @@ const SignUpForm = props => {
   );
 }
 
+const SignUpLink = () => (
+  <p>
+    Noch keinen Account? <Link to={ROUTES.SIGN_UP}>Registrieren</Link>
+  </p>
+)
+
+export { SignUpLink };
 export default SignUp;
