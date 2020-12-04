@@ -1,12 +1,12 @@
 import React from 'react';
 
-
 import { Link } from 'react-router-dom';
 import { signOut, useSession } from './Auth/helper';
 
 import * as ROUTES from '../config/routes';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Button, Nav, Navbar } from 'react-bootstrap';
 
+import logo from '../logo192.png';
 
 const Navigation = () => {
   const user = useSession();
@@ -21,16 +21,23 @@ const Navigation = () => {
     <Nav.Link as={Link} to={ROUTES.HOME}>Home</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.ACCOUNT}>Account</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.ADMIN}>Admin</Nav.Link>
-    <Nav.Link onClick={signOut}>Abmelden</Nav.Link>
+    <Nav.Link as={Button} variant="dark" style={{color:"white"}} onClick={signOut}>Abmelden</Nav.Link>
   </React.Fragment>
 
   return(
-    <Navbar className="justify-content-end" bg="light" expand="lg">
-      <Nav>
-        <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link>
-        {!user && nonAuthLinks}
-        {user && authLinks}
-      </Nav>
+    <Navbar bg="light" expand="lg">
+      <Navbar.Brand>
+        <img alt="brand logo" src={logo} width="30" height="30" />
+        Stickyboi
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse className="justify-content-end">
+        <Nav>
+          <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link>
+          {!user && nonAuthLinks}
+          {user && authLinks}
+        </Nav>
+      </Navbar.Collapse>
     </Navbar>
   )
 }
