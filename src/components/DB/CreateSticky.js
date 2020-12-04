@@ -38,11 +38,12 @@ const CreateSticky = (props) => {
   const user = useSession();
   const { register, handleSubmit, watch, errors, getValues } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data, e) => {
     console.log(getValues());
     const entry = await createSticky(user, {
       ...getValues()
     });
+    e.target.reset();
   }
   
   return (
@@ -85,7 +86,7 @@ const CreateSticky = (props) => {
           </React.Fragment>}
       </Form.Group>
 
-      <Button variant="primary" type="submit">Sticky erstellen!</Button>
+      <Button variant="primary" block type="submit">Sticky erstellen!</Button>
 
 
     </Form>
