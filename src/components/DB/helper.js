@@ -42,3 +42,13 @@ export const createSticky = (user, stickyData) => {
     user: getUserFields(user),
   });
 }
+
+// returns promise, as do all the other db helper functions
+export const updateStickyDueDate = (stickyDocReference, newDueDateString) => {
+  console.log("updating sticky...")
+  return stickyDocReference.update({dueDateString: newDueDateString});
+}
+
+export const deleteSticky = (stickyDocReference) => {
+  return stickyDocReference.delete();
+}
