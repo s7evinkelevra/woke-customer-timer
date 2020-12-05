@@ -55,7 +55,7 @@ const StickyCard = ({ docSnapshot }) => {
   return (
     <Card bg={theme} text="white" className="mb-4">
       {dueDate ?
-        <Card.Header className="font-weight-bold">{dueDateFormat(dueDate)} - {dateDiff(dueDate)} - {recurring && <span>Interval: {interval} Tage</span>}</Card.Header> :
+        <Card.Header className="font-weight-bold">{dueDateFormat(dueDate)} - {dateDiff(dueDate)}{recurring && <span> - Interval: {interval} Tage</span>}</Card.Header> :
         <Card.Header>Kein Stichtag</Card.Header>
       }
       <Card.Body>
@@ -67,7 +67,7 @@ const StickyCard = ({ docSnapshot }) => {
 
       <Card.Footer >
         <div className="d-md-flex justify-content-end">
-          {recurring && dueDate &&
+          {(recurring && dueDate) &&
             <React.Fragment>
               <Button className="ml-1 mt-1" variant="dark" onClick={() => resetCardFromToday(docSnapshot)}>Von Heute Zurücksetzen</Button>
               <Button className="ml-1 mt-1" variant="dark" onClick={() => resetCard(docSnapshot)}>Zurücksetzen</Button>
