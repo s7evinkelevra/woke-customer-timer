@@ -55,7 +55,7 @@ const StickyCard = ({ docSnapshot }) => {
   return (
     <Card bg={theme} text="white" className="mb-4">
       {dueDate ?
-        <Card.Header className="font-weight-bold">{dueDateFormat(dueDate)} - {dateDiff(dueDate)}{recurring && <span> - Interval: {interval} Tage</span>}</Card.Header> :
+        <Card.Header className="font-weight-bold">{dueDateFormat(dueDate)} - {dateDiff(dueDate)}{recurring && <span> - Alle {interval} Tage</span>}</Card.Header> :
         <Card.Header>Kein Stichtag</Card.Header>
       }
       <Card.Body>
