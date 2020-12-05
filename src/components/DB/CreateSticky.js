@@ -45,6 +45,15 @@ const CreateSticky = (props) => {
     });
     e.target.reset();
   }
+
+  const isSetWhenRecurring = (value) => {
+    console.log("value",value);
+    console.log("recurring", getValues("recurring"))
+    if (getValues("recurring")){
+      return !(!value || value == "");
+    }
+    return true
+  }
   
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -66,16 +75,16 @@ const CreateSticky = (props) => {
 
       <Form.Group controlId="formDueDate">
         <Form.Label>Stichtag</Form.Label>
-        <Form.Control type="date" name="dueDate" ref={register} />
+        <Form.Control type="date" name="dueDateString" ref={register({ validate: isSetWhenRecurring })} />
         <Form.Text className="text-muted">
-          {errors.dueDate && <span>Was da los?</span>}
+          {errors.dueDateString && <span>Datum muss gesetzt sein!</span>}
         </Form.Text>
       </Form.Group>
 
       <Form.Group controlId="formRecurring">
         <Form.Check type="checkbox" label="Wiederholen?" name="recurring" ref={register} />
         <Form.Text className="text-muted">
-          {errors.dueDate && <span>Was da los?</span>}
+          {errors.recurring && <span>Was da los?</span>}
         </Form.Text>
         {/* conditionally render the number input form lul */}
         {watch("recurring") && 
@@ -86,7 +95,7 @@ const CreateSticky = (props) => {
           </React.Fragment>}
       </Form.Group>
 
-      <Button variant="primary" block type="submit">Sticky erstellen!</Button>
+      <Button variant="primary" block type="submit">Sticky erstellen</Button>
 
 
     </Form>
