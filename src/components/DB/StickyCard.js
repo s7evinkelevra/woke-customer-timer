@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { updateStickyDueDate, deleteSticky } from './helper';
 import { Button, Card } from 'react-bootstrap';
-import { addDays, differenceInDays, format, formatDistance, formatRelative, subDays } from 'date-fns';
+import { addDays, differenceInDays, format, formatDistance } from 'date-fns';
 import { de } from 'date-fns/locale';
 import _ from 'lodash';
 

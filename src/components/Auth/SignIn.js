@@ -8,7 +8,7 @@ import { SignUpLink } from './SignUp';
 import * as ROUTES from '../../config/routes';
 import { Button, Form } from 'react-bootstrap';
 
-const SignIn = (props) => (
+const SignIn = () => (
   <div>
     <h1>Anmelden</h1>
     <SignInForm />

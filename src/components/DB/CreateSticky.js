@@ -47,10 +47,8 @@ const CreateSticky = (props) => {
   }
 
   const isSetWhenRecurring = (value) => {
-    console.log("value",value);
-    console.log("recurring", getValues("recurring"))
     if (getValues("recurring")){
-      return !(!value || value == "");
+      return (!value && value !== "");
     }
     return true
   }
