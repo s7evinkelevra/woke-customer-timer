@@ -50,7 +50,7 @@ const SignInForm = props => {
         <Form.Control type="password" name="password" defaultValue="test123456" ref={register({ required: true })} />
         <Form.Text className="text-muted">
           {errors.password && <span>Password is required!</span>}
-          {firebaseError != "" && <span>{firebaseError}</span>}
+          {firebaseError !== "" && <span>{firebaseError}</span>}
         </Form.Text>
       </Form.Group>
       <Button variant="primary" type="submit">Anmelden</Button>
