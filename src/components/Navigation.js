@@ -20,7 +20,7 @@ const Navigation = () => {
   const authLinks = <React.Fragment>
     <Nav.Link as={Link} to={ROUTES.HOME}>Home</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.ERNST}>Ernst</Nav.Link>
-    <Nav.Link as={SignOutButton} variant="dark" style={{ color: "white" }}></Nav.Link>
+    <Nav.Link as={SignOutButton} variant="dark" className="text-white ml-1"></Nav.Link>
   </React.Fragment>
 
   return(
