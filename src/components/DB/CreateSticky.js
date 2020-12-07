@@ -48,7 +48,7 @@ const CreateSticky = (props) => {
 
   const isSetWhenRecurring = (value) => {
     if (getValues("recurring")){
-      return (!value && value !== "");
+      return (value && value !== "");
     }
     return true
   }
