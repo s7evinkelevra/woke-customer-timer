@@ -13,6 +13,7 @@ import Landing from './Landing';
 import SignUp from './Auth/SignUp';
 import SignIn from './Auth/SignIn';
 import Home from './Home';
+import Ernst from './Ernst';
 
 
 
@@ -50,6 +51,7 @@ function App() {
           <Route path={ROUTES.SIGN_UP} component={SignUp} />
           <Route path={ROUTES.SIGN_IN} component={SignIn} />
           <Route path={ROUTES.HOME} component={Home} />
+          <Route path={ROUTES.ERNST} component={Ernst} />
         </Container>
       </Router>
     </userContext.Provider>
