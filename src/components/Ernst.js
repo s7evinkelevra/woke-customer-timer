@@ -1,20 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { addMonths, addYears, differenceInDays, differenceInHours, differenceInMilliseconds, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears, getDate, getDay, getMonth, getYear, subYears } from 'date-fns';
-import _ from 'lodash';
-
-const calculateTimeDiffHuman = (nowDate, targetDate) => {
-  const years = getYear(nowDate) - getYear(targetDate);
-  const months = getMonth(nowDate) - getMonth(targetDate);
-  const days = getDate(nowDate) - getDate(targetDate);
-
-  return {years,months,days};
-}
+import { differenceInDays, differenceInHours, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears, intervalToDuration } from 'date-fns';
 
 
 const Ernst = () => {
   const [nowDate, setNowDate] = useState(new Date())
-  const harwtigDate = Date.parse('06 Mar 2016 00:00:00 GMT')
-  const {years,months,days} = calculateTimeDiffHuman(nowDate, harwtigDate);
+  const harwtigDate = Date.parse('06 Mar 2016 03:00:00 GMT')
+  const { years, months, days } = intervalToDuration({ start: harwtigDate, end: nowDate });
 
   const functionsForTime = [
     {fn:differenceInSeconds,name:"Sekunden"},
