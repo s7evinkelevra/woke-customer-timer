@@ -37,7 +37,7 @@ const Ernst = () => {
     <React.Fragment>
       <h1>Was man so braucht.</h1>
       <h2 className="my-4">Timer für Hartwig, 14.11.1958 - 06.03.2016</h2>
-      <p>Seit dem Tod von Hartwig sind {years} Jahre, {months} Monat(e) und {days} Tag(e) vergangen.</p>
+      <p>Seit dem Tod von Hartwig sind {years} Jahre, {months} Monat{months!==1 && <React.Fragment>e</React.Fragment>} und {days} Tag{days!==1 && <React.Fragment>e</React.Fragment>} vergangen.</p>
       <ul className="list-group">
         {functionsForTime.map((val) => {
           return(
