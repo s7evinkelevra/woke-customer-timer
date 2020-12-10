@@ -24,7 +24,7 @@ const cardThemeFromDiff = (date) => {
   const diffDays = differenceInDays(date, new Date());
 
   const level = _.find(levels, (level) => {
-    return level.diff >= diffDays;
+    return level.diff > diffDays;
   });
   return level ? level.variant : false;
 }
