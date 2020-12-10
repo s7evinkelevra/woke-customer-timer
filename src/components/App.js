@@ -17,13 +17,14 @@ import Ernst from './Ernst';
 
 
 
-const login = () => {
+/* const login = () => {
   firebase.auth().signInWithEmailAndPassword('test@test.test', 'test123456');
 }
 
 const logout = () => {
   firebase.auth().signOut();
 }
+ */
 
 function App() {
   const [user, loading, error] = useAuthState(firebase.auth());

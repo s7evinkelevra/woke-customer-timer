@@ -64,8 +64,8 @@ const SignUpForm = props => {
         <Form.Label>Passwort wiederholen</Form.Label>
         <Form.Control type="password" name="password2" ref={register({ required: true, validate: isSame })} />
         <Form.Text className="text-muted">
-          {errors.password2 && errors.password2.type == "validate" && <span>Passwords don't match!</span>}
-          {firebaseError != "" && <span>{firebaseError}</span>}
+          {errors.password2 && errors.password2.type === "validate" && <span>Passwords don't match!</span>}
+          {firebaseError !== "" && <span>{firebaseError}</span>}
         </Form.Text>
       </Form.Group>
 
