@@ -14,7 +14,7 @@ import SignUp from './Auth/SignUp';
 import SignIn from './Auth/SignIn';
 import Home from './Home';
 import Ernst from './Ernst';
-
+import ResetPassword from './Auth/ResetPassword';
 
 
 /* const login = () => {
@@ -53,6 +53,7 @@ function App() {
           <Route path={ROUTES.SIGN_IN} component={SignIn} />
           <Route path={ROUTES.HOME} component={Home} />
           <Route path={ROUTES.ERNST} component={Ernst} />
+          <Route path={ROUTES.PASSWORD_RESET} component={ResetPassword} />
         </Container>
       </Router>
     </userContext.Provider>

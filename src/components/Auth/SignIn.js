@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import { loginWithEmail } from './helper';
 import { SignUpLink } from './SignUp';
+import { ResetPasswordLink } from './ResetPassword';
 
 import * as ROUTES from '../../config/routes';
 import { Button, Form } from 'react-bootstrap';
@@ -13,6 +14,7 @@ const SignIn = () => (
     <h1>Anmelden</h1>
     <SignInForm />
     <SignUpLink />
+    <ResetPasswordLink />
   </div>
 );
 
