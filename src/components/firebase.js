@@ -12,7 +12,12 @@ const config = {
   appId: process.env.REACT_APP_APP_ID
 };
 
-firebase.initializeApp(config);
+try{
+  firebase.initializeApp(config);
+} catch (err) {
+  console.log(err);
+  throw err;
+}
 
 const db = firebase.firestore();
 
