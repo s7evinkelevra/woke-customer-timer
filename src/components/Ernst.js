@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { differenceInDays, differenceInHours, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears, intervalToDuration } from 'date-fns';
+import { differenceInDays, differenceInHours, differenceInMinutes, differenceInMonths, differenceInSeconds, differenceInWeeks, differenceInYears, intervalToDuration } from 'date-fns';
 
 
 const Ernst = () => {
@@ -9,6 +9,7 @@ const Ernst = () => {
 
   const functionsForTime = [
     {fn:differenceInSeconds,name:"Sekunden"},
+    {fn:differenceInMinutes,name:"Minuten"},
     {fn:differenceInHours,name:"Stunden"},
     {fn:differenceInDays,name:"Tage"},
     {fn:differenceInWeeks,name:"Wochen"},
