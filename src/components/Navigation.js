@@ -13,6 +13,7 @@ const Navigation = () => {
 
   
   const nonAuthLinks = <React.Fragment>
+    <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.SIGN_IN}>Anmelden</Nav.Link>
     <Nav.Link as={Link} to={ROUTES.SIGN_UP}>Registrieren</Nav.Link>
   </React.Fragment>
@@ -32,7 +33,6 @@ const Navigation = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse className="justify-content-end">
         <Nav>
-          <Nav.Link as={Link} to={ROUTES.LANDING}>Landing</Nav.Link>
           {!user && nonAuthLinks}
           {user && authLinks}
         </Nav>

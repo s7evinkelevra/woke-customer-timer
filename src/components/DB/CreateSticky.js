@@ -1,7 +1,9 @@
 import React from 'react';
 import firebase from 'firebase';
+import _ from 'lodash';
 import { useSession } from '../Auth/helper';
-import { getUserFields, createSticky } from './helper';
+import { getUserFields, createSticky, useStickies, refsToData } from './helper';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useForm } from 'react-hook-form';
 import { Button, Form } from 'react-bootstrap';
 
@@ -33,15 +35,24 @@ const CustomFormGroup = (props) => {
   )
 }
 
-
 const CreateSticky = (props) => {
   const user = useSession();
+  const stickiesRef = useStickies();
   const { register, handleSubmit, watch, errors, getValues } = useForm();
 
+
+  const processValues = (values) => {
+    return {
+      ...values,
+      tags: values.tags.split(",").map(string => string.trim()).filter(el => !(el===""))
+    }
+  }
+
   const onSubmit = async (data, e) => {
+    console.log(processValues(getValues()));
     console.log(getValues());
     const entry = await createSticky(user, {
-      ...getValues()
+      ...processValues(getValues())
     });
     e.target.reset();
   }
@@ -93,9 +104,15 @@ const CreateSticky = (props) => {
           </React.Fragment>}
       </Form.Group>
 
+      <Form.Group controlId="formTags">
+        <Form.Label>Tag(s)</Form.Label>
+        <Form.Control name="tags" ref={register} />
+        <Form.Text className="text-muted">
+          {errors.tagString && <span>Was los mit tag?</span>}
+        </Form.Text>
+      </Form.Group>
+
       <Button variant="primary" block type="submit">Sticky erstellen</Button>
-
-
     </Form>
 
 

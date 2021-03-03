@@ -6,23 +6,19 @@ import { useSession } from '../Auth/helper';
 import StickyCard from './StickyCard';
 
 import _ from 'lodash';
+import { useStickies } from './helper';
 
 
 const StickyList = (props) => {
   const user = useSession();
-  const [valueSnapshot, loading, error] = useCollection(
-    firebase.firestore().collection(`/users/${user?.uid}/stickies`)
-  );
-
+  const stickiesRef = useStickies();
 
   return (
     <div>
-      {error && <strong>Error: {JSON.stringify(error)}</strong>}
-      {loading && <span>Collection: Loading....</span>}
-      {valueSnapshot &&
+      {stickiesRef &&
         <React.Fragment>
-          {valueSnapshot.docs.map(docSnapshot => {
-            console.log(docSnapshot.data());
+        {stickiesRef.docs.map(docSnapshot => {
+            /* console.log(docSnapshot.data()); */
             return(
               <StickyCard key={docSnapshot.id} docSnapshot={docSnapshot} />
             )

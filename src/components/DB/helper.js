@@ -1,7 +1,20 @@
+import { useContext } from 'react';
 import firebase from 'firebase/app';
 import _ from 'lodash';
 
+import { stickyRefContext } from '../stickyContext';
+
+
 export const fs = firebase.firestore();
+
+export const useStickies = () => {
+  const { stickiesRef } = useContext(stickyRefContext);
+  return stickiesRef;
+}
+
+export const refsToData = (refs) => {
+  return refs.docs.map((doc) => (doc.data()));
+}
 
 export const getUserFields = (user) => {
   return {
