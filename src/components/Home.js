@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import firebase from 'firebase/app'
 import Skeleton from 'react-loading-skeleton';
 import CreateSticky from './DB/CreateSticky';
@@ -10,16 +10,25 @@ import { stickyRefContext } from './stickyContext';
 
 const Home = () => {
   const user = useSession();
-  const [valueRef, loading, error] = useCollection(
-    firebase.firestore().collection(`/users/${user?.uid}/stickies`)
-  );
+
+  const [query, setQuery] = useState(null);
+
+  // query: firebase.firestore().collection(`/users/${user?.uid}/stickies`)
+  const [valueRef, loading, error] = useCollection(query);
+
+  // the query is dependent on the user id, so wait for userid changes(?)
+  useEffect(() => {
+    setQuery(firebase.firestore().collection(`/users/${user?.uid}/stickies`));
+  }, [user])
 
   return (
     <stickyRefContext.Provider
       value={{
         stickiesRef: valueRef,
         loading,
-        error
+        error,
+        query,
+        setQuery
     }}>
       <h1>Sticky Central</h1>
       <h2 className="my-4">Create new sticky</h2>

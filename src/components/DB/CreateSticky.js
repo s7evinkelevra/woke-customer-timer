@@ -37,7 +37,7 @@ const CustomFormGroup = (props) => {
 
 const CreateSticky = (props) => {
   const user = useSession();
-  const stickiesRef = useStickies();
+  const { stickiesRef } = useStickies();
   const { register, handleSubmit, watch, errors, getValues } = useForm();
 
 

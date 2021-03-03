@@ -8,8 +8,7 @@ import { stickyRefContext } from '../stickyContext';
 export const fs = firebase.firestore();
 
 export const useStickies = () => {
-  const { stickiesRef } = useContext(stickyRefContext);
-  return stickiesRef;
+  return useContext(stickyRefContext);
 }
 
 export const refsToData = (refs) => {

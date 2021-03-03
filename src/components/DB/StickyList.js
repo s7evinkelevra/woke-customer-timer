@@ -11,7 +11,7 @@ import { useStickies } from './helper';
 
 const StickyList = (props) => {
   const user = useSession();
-  const stickiesRef = useStickies();
+  const { stickiesRef } = useStickies();
 
   return (
     <div>
