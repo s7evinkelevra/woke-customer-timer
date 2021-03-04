@@ -5,5 +5,7 @@ export const stickyRefContext = createContext({
   loading:true, 
   error:false, 
   query: null,
-  setQuery: () => {}
+  setQuery: () => {},
+  tagFilter:[],
+  setTagFilter: () => {},
 });

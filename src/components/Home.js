@@ -12,6 +12,7 @@ const Home = () => {
   const user = useSession();
 
   const [query, setQuery] = useState(null);
+  const [tagFilter, setTagFilter] = useState([]);
 
   // query: firebase.firestore().collection(`/users/${user?.uid}/stickies`)
   const [valueRef, loading, error] = useCollection(query);
@@ -28,7 +29,9 @@ const Home = () => {
         loading,
         error,
         query,
-        setQuery
+        setQuery,
+        tagFilter,
+        setTagFilter,
     }}>
       <h1>Sticky Central</h1>
       <h2 className="my-4">Create new sticky</h2>

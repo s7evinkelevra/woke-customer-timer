@@ -30,8 +30,8 @@ const cardThemeFromDiff = (date) => {
 }
 
 
-const StickyCard = ({ docSnapshot }) => {
-  const { title, description, dueDateString, recurring, interval } = docSnapshot.data();
+const StickyCard = (props) => {
+  const { title, description, dueDateString, recurring, interval, snapshot } = props;
   // check if dueDateString is a valid date
   // Date.parse will return NaN if not
   const dueDate = Date.parse(dueDateString);
@@ -69,11 +69,11 @@ const StickyCard = ({ docSnapshot }) => {
         <div className="d-md-flex justify-content-end">
           {(recurring && dueDate) &&
             <React.Fragment>
-              <Button className="ml-1 mt-1" variant="dark" onClick={() => resetCardFromToday(docSnapshot)}>Von Heute Zurücksetzen</Button>
-              <Button className="ml-1 mt-1" variant="dark" onClick={() => resetCard(docSnapshot)}>Zurücksetzen</Button>
+            <Button className="ml-1 mt-1" variant="dark" onClick={() => resetCardFromToday(snapshot)}>Von Heute Zurücksetzen</Button>
+            <Button className="ml-1 mt-1" variant="dark" onClick={() => resetCard(snapshot)}>Zurücksetzen</Button>
             </React.Fragment>}
 
-          <Button className="ml-1 mt-1" variant="dark" onClick={() => closeCard(docSnapshot)}>Abschließen</Button>
+          <Button className="ml-1 mt-1" variant="dark" onClick={() => closeCard(snapshot)}>Abschließen</Button>
         </div>
 
       </Card.Footer>

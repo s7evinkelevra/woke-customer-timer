@@ -1,28 +1,25 @@
 import React from 'react';
-import firebase from 'firebase/app'
-import { useCollection } from 'react-firebase-hooks/firestore';
-
-import { useSession } from '../Auth/helper';
 import StickyCard from './StickyCard';
-
-import _ from 'lodash';
 import { useStickies } from './helper';
 
 
 const StickyList = (props) => {
-  const user = useSession();
   const { stickiesRef } = useStickies();
+
+  const stickies = stickiesRef.docs.map(docSnapshot => {
+    return {
+      ...docSnapshot.data(),
+      snapshot: docSnapshot,
+    }
+  });
 
   return (
     <div>
       {stickiesRef &&
         <React.Fragment>
-        {stickiesRef.docs.map(docSnapshot => {
-            /* console.log(docSnapshot.data()); */
-            return(
-              <StickyCard key={docSnapshot.id} docSnapshot={docSnapshot} />
-            )
-          })}
+        {stickies.map(sticky => (
+              <StickyCard key={sticky.snapshot.id} {...sticky} />
+            ))}
       </React.Fragment>
       }
     </div>
