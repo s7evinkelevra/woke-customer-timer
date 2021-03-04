@@ -1,23 +1,43 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import _ from 'lodash';
 import StickyCard from './StickyCard';
 import { useStickies } from './helper';
 
 
 const StickyList = (props) => {
-  const { stickiesRef } = useStickies();
+  const { stickiesRef, tagFilter } = useStickies();
 
-  const stickies = stickiesRef.docs.map(docSnapshot => {
-    return {
-      ...docSnapshot.data(),
-      snapshot: docSnapshot,
-    }
-  });
+  const stickies = useMemo(() => (
+    stickiesRef.docs.map(docSnapshot => {
+      return {
+        ...docSnapshot.data(),
+        snapshot: docSnapshot,
+      }
+    })
+  ), [stickiesRef]);
+
+  // filter stickies by tag
+  // TODO(Jan): This feels dumb, refactor.
+  let tagStickies;
+  if(tagFilter.length > 0) {
+    tagStickies = _.filter(stickies, (sticky) => {
+      if(sticky.tags && sticky.tags.length > 0) {
+        return (_.intersection(sticky.tags, tagFilter).length > 0)
+      }else{
+        return false;
+      }
+    })
+  }else{
+    tagStickies = stickies;
+  }
+
+
 
   return (
     <div>
       {stickiesRef &&
         <React.Fragment>
-        {stickies.map(sticky => (
+        {tagStickies.map(sticky => (
               <StickyCard key={sticky.snapshot.id} {...sticky} />
             ))}
       </React.Fragment>
