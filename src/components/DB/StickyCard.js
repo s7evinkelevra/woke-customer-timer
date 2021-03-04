@@ -60,8 +60,8 @@ const StickyCard = (props) => {
           <React.Fragment>{dueDateFormat(dueDate)} - {dateDiff(dueDate)}{recurring && <span> - Alle {interval} Tage</span>}</React.Fragment> :
           <React.Fragment>Kein Stichtag</React.Fragment>
         }
-        {tags &&
-          <span> - {tags.map((tag) => (<Tag className="ml-3" tag={tag} />))}</span>
+        {tags && tags?.length > 0 &&
+          <span> - {tags.map((tag) => (<Tag key={tag} className="ml-3" tag={tag} />))}</span>
         }
       </Card.Header>
 
