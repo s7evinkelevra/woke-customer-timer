@@ -1,4 +1,5 @@
 import React from 'react';
+import Tag from './Tag';
 import { updateStickyDueDate, deleteSticky } from './helper';
 import { Button, Card } from 'react-bootstrap';
 import { addDays, differenceInDays, format, formatDistance } from 'date-fns';
@@ -31,7 +32,7 @@ const cardThemeFromDiff = (date) => {
 
 
 const StickyCard = (props) => {
-  const { title, description, dueDateString, recurring, interval, snapshot } = props;
+  const { title, description, dueDateString, recurring, interval, tags, snapshot } = props;
   // check if dueDateString is a valid date
   // Date.parse will return NaN if not
   const dueDate = Date.parse(dueDateString);
@@ -54,10 +55,17 @@ const StickyCard = (props) => {
 
   return (
     <Card bg={theme} text="white" className="mb-4">
-      {dueDate ?
-        <Card.Header className="font-weight-bold">{dueDateFormat(dueDate)} - {dateDiff(dueDate)}{recurring && <span> - Alle {interval} Tage</span>}</Card.Header> :
-        <Card.Header>Kein Stichtag</Card.Header>
-      }
+      <Card.Header className="font-weight-bold">
+        {dueDate ?
+          <React.Fragment>{dueDateFormat(dueDate)} - {dateDiff(dueDate)}{recurring && <span> - Alle {interval} Tage</span>}</React.Fragment> :
+          <React.Fragment>Kein Stichtag</React.Fragment>
+        }
+        {tags &&
+          <span> - {tags.map((tag) => (<Tag className="ml-3" tag={tag} />))}</span>
+        }
+      </Card.Header>
+
+
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Text>
