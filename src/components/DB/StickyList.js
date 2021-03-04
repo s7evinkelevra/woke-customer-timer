@@ -5,7 +5,7 @@ import { useStickies } from './helper';
 
 
 const StickyList = (props) => {
-  const { stickiesRef, tagFilter } = useStickies();
+  const { stickiesRef, tagFilter, setTagFilter } = useStickies();
 
   const stickies = useMemo(() => (
     stickiesRef.docs.map(docSnapshot => {
@@ -31,7 +31,7 @@ const StickyList = (props) => {
     tagStickies = stickies;
   }
 
-
+  // FIXME(Jan): Tag disappears from tag list when there is no sticky left with that tag. Then you can't unselect that tag and it's stuck in the tagFilter list
 
   return (
     <div>
