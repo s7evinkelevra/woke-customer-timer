@@ -8,33 +8,6 @@ import { useForm } from 'react-hook-form';
 import { Button, Form } from 'react-bootstrap';
 
 
-
-const testEntry = async (user) => {
-  const entry = await createSticky(user.uid, {
-    userId: user.uid,
-    createdBy: getUserFields(user),
-    title: "Dinge endlich tun",
-    descriptions: "yee yeee",
-    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
-    dueAt: firebase.firestore.Timestamp.fromDate(new Date(2020,11,1)),
-    recurring: 5,
-  });
-  console.log(entry);
-}
-
-const CustomFormGroup = (props) => {
-
-  return(
-    <Form.Group controlId={props.controlId}>
-      <Form.Label>{props.label}</Form.Label>
-      <Form.Control {...props.control} />
-      <Form.Text className="text-muted">
-        {props.errors[props.title] && <span>{props.errorMessage}</span>}
-      </Form.Text>
-    </Form.Group>
-  )
-}
-
 const CreateSticky = (props) => {
   const user = useSession();
   const { stickiesRef } = useStickies();
