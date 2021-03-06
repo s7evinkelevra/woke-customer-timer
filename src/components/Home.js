@@ -19,7 +19,7 @@ const Home = () => {
 
   // the query is dependent on the user id, so wait for userid changes(?)
   useEffect(() => {
-    setQuery(firebase.firestore().collection(`/users/${user?.uid}/stickies`));
+    setQuery(firebase.firestore().collection(`/users/${user?.uid}/stickies`).orderBy("createdAt","desc"));
   }, [user])
 
   return (
