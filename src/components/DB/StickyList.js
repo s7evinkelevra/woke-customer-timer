@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import _ from 'lodash';
 import StickyCard from './StickyCard';
 import { useStickies } from './helper';
@@ -18,7 +18,7 @@ const StickyList = (props) => {
 
   // filter stickies by tag
   // TODO(Jan): This feels dumb, refactor.
-  let tagStickies;
+  let tagStickies = [];
   if(tagFilter.length > 0) {
     tagStickies = _.filter(stickies, (sticky) => {
       if(sticky.tags && sticky.tags.length > 0) {
@@ -26,18 +26,25 @@ const StickyList = (props) => {
       }else{
         return false;
       }
-    })
-  }else{
-    tagStickies = stickies;
+    });
   }
 
-  // FIXME(Jan): Tag disappears from tag list when there is no sticky left with that tag. Then you can't unselect that tag and it's stuck in the tagFilter list
+  // this is necessary to clear the tag filter when there is a tag selected but no sticky left in that tag.
+  // Tag disappears from tag list when there is no sticky left with that tag. 
+  // Then you can't unselect that tag and it's stuck in the tagFilter list
+  useEffect(() => {
+    if(tagStickies.length === 0) { setTagFilter([])}
+  }, [stickies]);
+
+  // if there are no stickies that match the filter, show all stickies
+  // this happens when no tag is selected or the tag is selected but there is no sticky in that tag left
+  const renderStickies = tagStickies.length > 0 ? tagStickies : stickies;
 
   return (
     <div>
       {stickiesRef &&
         <React.Fragment>
-        {tagStickies.map(sticky => (
+        {renderStickies.map(sticky => (
               <StickyCard key={sticky.snapshot.id} {...sticky} />
             ))}
       </React.Fragment>
