@@ -1,6 +1,9 @@
 # Getting Started with Create React App
 
-simple sticky app with some additional time management features + firebase backend.
+Simple sticky app with some additional time management features + firebase (auth+firestore) backend. 1 click deployable to netlify.
+Text+content just for demo puroposes, enjoy with caution.
+
+Working demo: [https://crm.luedemann2.de]
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
