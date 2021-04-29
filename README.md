@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+simple sticky app with some additional time management features + firebase backend.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
